@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=vibrant_deck_cli
+Version=0.1.0
+Icon=color-management
+Exec=python ~/Source/vibrant_deck_cli/vibrant_deck_cli.py 1.5
+Terminal=false
+Type=Application
