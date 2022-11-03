@@ -12,7 +12,7 @@ SERVICE=$BIN.service
 SYSTEMD_USER_DIR=$HOME/.config/systemd/user
 
 CONFIG_DIR=$HOME/.config/$BIN
-DEFAULT_SATURATION=4
+DEFAULT_SATURATION=1.5
 
 # ----------------------------------------
 
