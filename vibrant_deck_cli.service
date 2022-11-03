@@ -4,7 +4,8 @@ Description=Vibrant Deck CLI Daemon
 [Service]
 Type=oneshot
 RemainAfterExit=true
-ExecStart=%h/.local/bin/vibrant_deck_cli 1.5
+EnvironmentFile=%h/.config/vibrant_deck_cli/config
+ExecStart=%h/.local/bin/vibrant_deck_cli $SATURATION
 ExecStop=%h/.local/bin/vibrant_deck_cli 1.0
 StandardOutput=journal
 
