@@ -1,0 +1,12 @@
+[Unit]
+Description=Vibrant Deck CLI Daemon
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=%h/.local/bin/vibrant_deck_cli 1.5
+ExecStop=%h/.local/bin/vibrant_deck_cli 1.0
+StandardOutput=journal
+
+[Install]
+WantedBy=default.target

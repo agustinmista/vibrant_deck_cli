@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 """
 vibrant_deck_cli - Adjust the screen saturation of the Steam Deck
 Copyright (C) 2022 Agustín Mista <agustin@mista.me> (https://mista.me)
@@ -94,7 +96,7 @@ def get_saturation() -> float:
     # Good output: "GAMESCOPE_COLOR_MATRIX(CARDINAL) = 1065353216, 0, 0, 0, 1065353216, 0, 0, 0, 1065353216"
     # Bad output:  "GAMESCOPE_COLOR_MATRIX:  not found."
     if "=" not in stdout:
-        sys.exit("error: could not retrieve current screen saturation\nxprop returned: %s" % stdout)
+        sys.exit("Error: could not retrieve current screen saturation\nxprop returned: %s" % stdout)
 
     # "1065353216, 0, 0, 0, 1065353216, 0, 0, 0, 1065353216"
     ctm_param = stdout.split("=")[1]
@@ -111,8 +113,9 @@ def get_saturation() -> float:
 # Command-line options parser
 
 parser = ArgumentParser(description="Set the screen saturation of the Steam Deck")
-parser.add_argument("-q", "--quiet", action="store_false", dest="verbose", default=True, help="don't print messages to stdout")
-parser.add_argument('saturation',    nargs="?",            type=float,     default=1.0,  help="desired screen saturation between 0.0 and 4.0 (default 1.0)")
+parser.add_argument("-q", "--quiet",  action="store_false", dest="verbose", default=True,  help="don't print messages to stdout")
+parser.add_argument("-s", "--status", action="store_true",  dest="status",  default=False, help="show the current screen saturation")
+parser.add_argument('saturation',     nargs="?",            type=float,     default=1.0,   help="desired screen saturation between 0.0 and 4.0 (default 1.0)")
 
 # ----------------------------------------
 # Entry point
@@ -123,9 +126,14 @@ if __name__ == "__main__":
     if args.verbose:
         verbose = True
 
+    if args.status:
+        saturation = get_saturation()
+        message("Current screen saturation is %f" % saturation)
+        exit()
+
     saturation = min(max(0.0, args.saturation), 4.0)
 
-    message("setting screen saturation to %f" % saturation)
+    message("Setting screen saturation to %f" % saturation)
     set_saturation(saturation)
     new_saturation = get_saturation()
-    message("screen saturation set to %f" % new_saturation)
+    message("Screen saturation set to %f" % new_saturation)
