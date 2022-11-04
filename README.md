@@ -1,6 +1,6 @@
 # vibrant_deck_cli
 
-A simple command line utility to tweak the screen saturation of the Steam Deck, along with a service to automatically enable it at startup. 
+A simple command line utility to tweak the screen saturation of the Steam Deck, along with a service to automatically enable it at startup.
 
 Based on [vibrantDeck](https://github.com/libvibrant/vibrantDeck).
 
@@ -22,20 +22,23 @@ Downloading https://raw.githubusercontent.com/agustinmista/vibrant_deck_cli/main
 Creating config file at to /home/deck/.config/vibrant_deck_cli/config ...
 Downloading https://raw.githubusercontent.com/agustinmista/vibrant_deck_cli/main/vibrant_deck_cli.service into /home/deck/.config/systemd/user ...
 Enabling vibrant_deck_cli.service on systemd ...
-Done! Try restarting your Steam Deck now :D
-The default screen saturation can be changed in /home/deck/.config/vibrant_deck_cli/config
+Created symlink /home/deck/.config/systemd/user/default.target.wants/vibrant_deck_cli.service → /home/deck/.config/systemd/user/vibrant_deck_cli.service.
+Starting vibrant_deck_cli.service ...
+Checking if everything worked ...
+Done! The screen saturation is now set to 1.500000 :D
+The default saturation value be changed in /home/deck/.config/vibrant_deck_cli/config
 ```
 
 ### Sligtly longer TL;DR
 
-The installer will download two files into your Steam Deck 
+The installer will download two files into your Steam Deck
 
 * `/home/deck/.local/bin/vibrant_deck_cli`: the tool itself
 * `/home/deck/.config/systemd/user/vibrant_deck_cli.service`: the service that runs the tool at startup
 
 Additionally, it will create the file:
 
-* `/home/deck/.config/vibrant_deck_cli/config`  
+* `/home/deck/.config/vibrant_deck_cli/config`
 
 The only tunable parameter is the saturation value that the tool sets at startup, which the installer sets to 1.5 by default. You can change it by editing the file above:
 
@@ -52,3 +55,22 @@ Screen saturation set to 1.250000
 ```
 
 Note that `vibrant_deck_cli` is not in your $PATH by default, so you need to run it from its installed location at `~/.local/bin`.
+
+## Uninstallation
+
+Simply run:
+
+```bash
+curl -sL https://github.com/agustinmista/vibrant_deck_cli/raw/main/uninstall.sh | sh
+```
+
+Which will stop the startup service and remove all the relevant files:
+
+```
+Stopping vibrant_deck_cli.service ...
+Disabling vibrant_deck_cli.service ...
+Removed /home/deck/.config/systemd/user/default.target.wants/vibrant_deck_cli.service.
+Removing /home/deck/.config/systemd/user/vibrant_deck_cli.service ...
+Removing /home/deck/.local/bin/vibrant_deck_cli ...
+Removing /home/deck/.config/vibrant_deck_cli
+```
