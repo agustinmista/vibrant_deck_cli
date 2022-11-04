@@ -46,7 +46,7 @@ The only tunable parameter is the saturation value that the tool sets at startup
 SATURATION=1.25
 ```
 
-If you're not sure which value to pick, you can manually run `vibrant_deck_cli` passing an input value between 0.0 and 7.0 and see the change in real time without having to reboot every time:
+If you're not sure which value to pick, you can manually run `vibrant_deck_cli` passing an input value between 0.0 and 4.0 and see the change in real time without having to reboot every time:
 
 ```
 $ ~/.local/bin/vibrant_deck_cli 1.25
