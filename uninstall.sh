@@ -24,6 +24,6 @@ rm $SYSTEMD_USER_DIR/$SERVICE
 echo "Removing $BIN_DIR/$BIN ..."
 rm $BIN_DIR/$BIN
 
-echo "Removing $CONFIG_DIR"
+echo "Removing $CONFIG_DIR ..."
 rm $CONFIG_DIR/config
 rmdir $CONFIG_DIR
