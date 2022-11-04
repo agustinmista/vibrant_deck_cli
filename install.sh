@@ -37,5 +37,23 @@ curl -sL $SERVICE_URL --output $SYSTEMD_USER_DIR/$SERVICE
 echo "Enabling $SERVICE on systemd ..."
 systemctl --user enable $SERVICE
 
-echo "Done! Try restarting your Steam Deck now :D"
-echo "The default screen saturation can be changed in $CONFIG_DIR/config"
+echo "Starting $SERVICE ..."
+systemctl --user restart $SERVICE
+
+echo "Checking if everything worked ..."
+
+SERVICE_INVOCATION=$(systemctl --user show --value -p InvocationID $SERVICE)
+CURRENT_SATURATION=$(journalctl _SYSTEMD_INVOCATION_ID=$SERVICE_INVOCATION -o cat | grep "set to" | awk '{print $5}')
+
+if [ ! -z "$CURRENT_SATURATION" ]; then
+  if (( $(awk 'BEGIN{ print "'$CURRENT_SATURATION'"=="'$DEFAULT_SATURATION'" }') == 0 )); then
+    echo "Done! The screen saturation is now set to $CURRENT_SATURATION :D"
+    echo "The default saturation value be changed in $CONFIG_DIR/config"
+  else
+    echo "Error: $BIN_DIR/$BIN $DEFAULT_SATURATION did not succeed. Current screen saturation is $SATURATION."
+    exit
+  fi
+else
+  echo "Error: $BIN_DIR/$BIN --status returned nothing"
+  exit
+fi
