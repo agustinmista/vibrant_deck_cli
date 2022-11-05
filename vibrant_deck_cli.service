@@ -1,10 +1,13 @@
 [Unit]
 Description=Vibrant Deck CLI Daemon
+After=graphical.target
+Wants=graphical.target
 
 [Service]
 Type=oneshot
 RemainAfterExit=true
 EnvironmentFile=%h/.config/vibrant_deck_cli/config
+ExecStartPre=/bin/sleep 5
 ExecStart=%h/.local/bin/vibrant_deck_cli $SATURATION
 ExecStop=%h/.local/bin/vibrant_deck_cli 1.0
 StandardOutput=journal
