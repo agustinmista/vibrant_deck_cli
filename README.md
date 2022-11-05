@@ -54,7 +54,7 @@ Setting screen saturation to 1.250000
 Screen saturation set to 1.250000
 ```
 
-Note that `vibrant_deck_cli` is not in your $PATH by default, so you need to run it from its installed location at `~/.local/bin`.
+Note that `vibrant_deck_cli` is not in your $PATH by default, so you need to run it from its installed location at `~/.local/bin`. Also note that this tool only affects the saturation while in game mode. The easiest way to the changes in real-time is to run `vibrant_deck_cli` from an SSH session while in game mode.
 
 ## Uninstallation
 
