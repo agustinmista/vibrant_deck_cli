@@ -27,7 +27,7 @@ mkdir -p $BIN_DIR
 curl -sL $BIN_URL --output $BIN_DIR/$BIN
 chmod +x $BIN_DIR/$BIN
 
-echo "Creating config file at to $CONFIG_DIR/config ..."
+echo "Creating config file at $CONFIG_DIR/config ..."
 mkdir -p $CONFIG_DIR
 echo "SATURATION=$DEFAULT_SATURATION" > $CONFIG_DIR/config
 
@@ -48,7 +48,7 @@ CURRENT_SATURATION=$(journalctl _SYSTEMD_INVOCATION_ID=$SERVICE_INVOCATION -o ca
 if [ ! -z "$CURRENT_SATURATION" ]; then
   if (( $(awk 'BEGIN{ print "'$CURRENT_SATURATION'"=="'$DEFAULT_SATURATION'" }') == 0 )); then
     echo "Done! The screen saturation is now set to $CURRENT_SATURATION :D"
-    echo "The default saturation value be changed in $CONFIG_DIR/config"
+    echo "The default saturation value can be changed in $CONFIG_DIR/config"
   else
     echo "Error: $BIN_DIR/$BIN $DEFAULT_SATURATION did not succeed. Current screen saturation is $SATURATION."
     exit
